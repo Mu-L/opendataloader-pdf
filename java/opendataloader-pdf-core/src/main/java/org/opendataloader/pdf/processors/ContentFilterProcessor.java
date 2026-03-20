@@ -52,6 +52,7 @@ public class ContentFilterProcessor {
     public static List<IObject> getFilteredContents(String inputPdfName, List<IChunk> contents, int pageNumber,
                                                     Config config) throws IOException {
         List<IObject> pageContents = new ArrayList<>(contents);
+        GlyphReorderProcessor.fixGarbledTextChunks(pageContents);
         TextProcessor.removeSameTextChunks(pageContents);
         pageContents = DocumentProcessor.removeNullObjectsFromList(pageContents);
         TextProcessor.removeTextDecorationImages(pageContents);
